@@ -4,10 +4,10 @@ import footballImg from "/football.png"; // Make sure the image is in public fol
 const Hero: React.FC = () => {
   return (
     <section className="relative w-full h-screen flex items-center bg-gradient-to-r from-black via-black/80 to-white text-white">
-      <div className="container mx-auto px-6 md:px-12 flex flex-col-reverse md:flex-row items-center justify-between h-full">
+      <div className="container mx-auto px-6 md:px-12 flex flex-col-reverse md:flex-row items-center justify-center md:justify-between h-full">
         
         {/* Left Content */}
-        <div className="w-full md:w-1/2 text-left space-y-6 z-10">
+        <div className="w-full md:w-1/2 text-left space-y-6 z-10 mt-10 md:mt-0">
           <h1 className="text-4xl md:text-5xl font-extrabold text-white drop-shadow-lg">
             Predict Football Wins with NFE
           </h1>
@@ -20,16 +20,16 @@ const Hero: React.FC = () => {
         </div>
 
         {/* Right Image */}
-        <div className="w-full md:w-1/2 flex justify-center z-10">
+        <div className="w-full md:w-1/2 flex justify-center items-center z-10 mt-8 md:mt-0">
           <img
             src={footballImg}
             alt="Football Player"
-            className="w-48 md:w-64 object-contain" // Reduced size
+            className="w-48 md:w-64 object-contain"
           />
         </div>
       </div>
 
-      {/* Optional Overlay for subtle blend (if needed) */}
+      {/* Background Gradient Overlay */}
       <div className="absolute inset-0 bg-gradient-to-r from-black via-transparent to-white opacity-70 -z-10" />
     </section>
   );
