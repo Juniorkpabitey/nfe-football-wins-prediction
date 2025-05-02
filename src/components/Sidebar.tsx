@@ -19,7 +19,7 @@ const Sidebar: React.FC<SidebarProps> = ({ selectedLeague, onSelectLeague }) => 
 
   return (
     <div className="w-64 bg-[#2C2F38] p-4">
-      <h1 className="text-xl font-bold mb-4">🏟️ Football info</h1>
+      <h1 className="text-xl font-bold mb-4">Football info</h1>
       <h2 className="text-green-400 text-sm mb-2">Leagues</h2>
       <ul className="space-y-4">
         {leagues.map((league) => (
