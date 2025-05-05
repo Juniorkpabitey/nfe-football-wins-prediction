@@ -1,8 +1,9 @@
-import * as React from "react"; // Import React explicitly
+import * as React from "react"; // Import React if necessary for TypeScript
+
 import { useState } from "react";
 import { IoSend } from "react-icons/io5";
 import { FaFutbol, FaUsers, FaTrophy, FaChartBar } from "react-icons/fa";
-import { GoogleGenerativeAI } from "@google/generative-ai";
+import { GoogleGenerativeAI } from "@google/generative-ai"; // Ensure this package is installed
 
 const footballLeagues = [
   "Premier League",
@@ -21,7 +22,7 @@ const SYSTEM_PROMPT = `You are a football prediction assistant AI. You analyze p
 const PredictionPage = () => {
   const [message, setMessage] = useState("");
   const [isResponseScreen, setIsResponseScreen] = useState(false);
-  const [messages, setMessages] = useState<{ type: string; text: string }[]>([]); // Type messages state
+  const [messages, setMessages] = useState<{ type: string; text: string }[]>([]); // Explicitly typing state
   const [selectedLeague, setSelectedLeague] = useState(footballLeagues[0]);
 
   const hitRequest = () => {
@@ -36,7 +37,7 @@ const PredictionPage = () => {
     if (!userMsg) return;
 
     try {
-      const genAI = new GoogleGenerativeAI("AIzaSyAnyjf8Oc1WXwWrJHidVhcvWinWkQ28tpE");
+      const genAI = new GoogleGenerativeAI("YOUR_GOOGLE_API_KEY_HERE"); // Replace with your actual key
       const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
       const chat = model.startChat({
