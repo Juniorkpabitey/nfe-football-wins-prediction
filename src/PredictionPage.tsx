@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import * as React from "react"; // Import React explicitly
+import { useState } from "react";
 import { IoSend } from "react-icons/io5";
 import { FaFutbol, FaUsers, FaTrophy, FaChartBar } from "react-icons/fa";
 import { GoogleGenerativeAI } from "@google/generative-ai";
@@ -20,7 +21,7 @@ const SYSTEM_PROMPT = `You are a football prediction assistant AI. You analyze p
 const PredictionPage = () => {
   const [message, setMessage] = useState("");
   const [isResponseScreen, setIsResponseScreen] = useState(false);
-  const [messages, setMessages] = useState([]);
+  const [messages, setMessages] = useState<{ type: string; text: string }[]>([]); // Type messages state
   const [selectedLeague, setSelectedLeague] = useState(footballLeagues[0]);
 
   const hitRequest = () => {
@@ -31,11 +32,11 @@ const PredictionPage = () => {
     }
   };
 
-  const generateResponse = async (userMsg) => {
+  const generateResponse = async (userMsg: string) => { // Type userMsg as string
     if (!userMsg) return;
 
     try {
-      const genAI = new GoogleGenerativeAI("API_KEY");
+      const genAI = new GoogleGenerativeAI("AIzaSyAnyjf8Oc1WXwWrJHidVhcvWinWkQ28tpE");
       const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
       const chat = model.startChat({
@@ -87,9 +88,7 @@ const PredictionPage = () => {
             {messages.map((msg, index) => (
               <div
                 key={index}
-                className={`bg-[#181818] text-white p-4 rounded-[30px] my-2 max-w-[60vw] min-w-[20vw] ${
-                  msg.type === "userMsg" ? "self-end" : "self-start"
-                }`}
+                className={`bg-[#181818] text-white p-4 rounded-[30px] my-2 max-w-[60vw] min-w-[20vw] ${msg.type === "userMsg" ? "self-end" : "self-start"}`}
               >
                 {msg.text}
               </div>
@@ -100,32 +99,13 @@ const PredictionPage = () => {
         <div className="h-[80vh] flex flex-col items-center justify-center">
           <h1 className="text-4xl mb-6">Predict With NFE</h1>
           <div className="flex gap-4">
-            {[
-              {
-                icon: <FaFutbol />,
-                text: "Know about matches?.",
-              },
-              {
-                icon: <FaChartBar />,
-                text: "Wants statistics of games?",
-              },
-              {
-                icon: <FaUsers />,
-                text: "Who is the best player in Barcelona?",
-              },
-              {
-                icon: <FaTrophy />,
-                text: "Which club has the highest EUROPHA Trophies?",
-              },
-            ].map((item, i) => (
+            {[{ icon: <FaFutbol />, text: "Know about matches?." }, { icon: <FaChartBar />, text: "Wants statistics of games?" }, { icon: <FaUsers />, text: "Who is the best player in Barcelona?" }, { icon: <FaTrophy />, text: "Which club has the highest EUROPA Trophies?" }].map((item, i) => (
               <div
                 key={i}
                 className="bg-[#181818] p-4 min-h-[20vh] w-[200px] rounded-lg relative hover:bg-[#201f1f] transition-all cursor-pointer"
               >
                 <p className="text-lg whitespace-pre-wrap">{item.text}</p>
-                <span className="absolute bottom-3 right-3 text-xl">
-                  {item.icon}
-                </span>
+                <span className="absolute bottom-3 right-3 text-xl">{item.icon}</span>
               </div>
             ))}
           </div>
@@ -138,11 +118,7 @@ const PredictionPage = () => {
           <button
             key={league}
             onClick={() => setSelectedLeague(league)}
-            className={`px-4 py-2 text-sm rounded-full ${
-              selectedLeague === league
-                ? "bg-green-500 text-black"
-                : "bg-[#181818] hover:bg-[#262626] text-white"
-            }`}
+            className={`px-4 py-2 text-sm rounded-full ${selectedLeague === league ? "bg-green-500 text-black" : "bg-[#181818] hover:bg-[#262626] text-white"}`}
           >
             {league}
           </button>
