@@ -1,4 +1,4 @@
-import * as React from "react"; // Import React if necessary for TypeScript
+//import * as React from "react"; // Import React if necessary for TypeScript
 
 import { useState } from "react";
 import { IoSend } from "react-icons/io5";
