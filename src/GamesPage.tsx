@@ -1,7 +1,9 @@
+// src/GamesPage.tsx
+
 import React, { useState, useEffect } from "react";
 import Sidebar from "./components/Sidebar";
 import Matches from "./components/Matches";
-import { filterLeague } from "./api"; // updated API
+import { filterLeague } from "./api";
 import { matchesType } from "./types";
 
 const GamesPage: React.FC = () => {
