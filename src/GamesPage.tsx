@@ -1,26 +1,29 @@
-// src/GamesPage.tsx
-
 import React, { useState, useEffect } from "react";
 import Sidebar from "./components/Sidebar";
-import Matches from "./components/Matches";
-import { filterLeague } from "./api";
+import MatchCard from "./components/Matches"; // Matches is actually MatchCard
 import { matchesType } from "./types";
 
 const GamesPage: React.FC = () => {
   const [selectedLeague, setSelectedLeague] = useState<string>("Premier League");
   const [matches, setMatches] = useState<matchesType[]>([]);
 
+  // Remove fetching logic for now
   useEffect(() => {
-    const loadMatches = async () => {
-      try {
-        const data = await filterLeague(selectedLeague);
-        setMatches(data);
-      } catch (error) {
-        console.error("Error fetching matches:", error);
-      }
-    };
-
-    loadMatches();
+    const dummyMatches: matchesType[] = [
+      {
+        id: "1",
+        league: "Premier League",
+        leagueLogo: "/premier-league.png",
+        leagueColor: "text-blue-500",
+        date: "2025-05-09",
+        homeTeam: "Manchester United",
+        awayTeam: "Chelsea",
+        homeLogo: "/manutd.png",
+        awayLogo: "/chelsea.png",
+        time: "19:00",
+      },
+    ];
+    setMatches(dummyMatches);
   }, [selectedLeague]);
 
   return (
@@ -40,7 +43,18 @@ const GamesPage: React.FC = () => {
         <div className="space-y-4 mt-6">
           {matches.length > 0 ? (
             matches.map((match, index) => (
-              <Matches key={index} data={match} />
+              <MatchCard
+                key={index}
+                league={match.league}
+                leagueLogo={match.leagueLogo}
+                leagueColor={match.leagueColor}
+                date={match.date}
+                homeTeam={match.homeTeam}
+                awayTeam={match.awayTeam}
+                homeLogo={match.homeLogo}
+                awayLogo={match.awayLogo}
+                time={match.time}
+              />
             ))
           ) : (
             <p className="text-gray-400">No matches available for this league.</p>
