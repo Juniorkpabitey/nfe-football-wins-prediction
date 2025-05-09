@@ -44,17 +44,18 @@ const GamesPage: React.FC = () => {
           {matches.length > 0 ? (
             matches.map((match, index) => (
               <MatchCard
-                key={index}
-                league={match.league}
-                leagueLogo={match.leagueLogo}
-                leagueColor={match.leagueColor}
-                date={match.date}
-                homeTeam={match.homeTeam}
-                awayTeam={match.awayTeam}
-                homeLogo={match.homeLogo}
-                awayLogo={match.awayLogo}
-                time={match.time}
-              />
+                  key={index}
+                  league={match.league}
+                  leagueLogo={match.leagueLogo}
+                  leagueColor={match.leagueColor}
+                  date={match.date}
+                  homeTeam={match.homeTeam}
+                  awayTeam={match.awayTeam}
+                  homeLogo={match.homeLogo}
+                  awayLogo={match.awayLogo}
+                  time={match.time}
+                />
+
             ))
           ) : (
             <p className="text-gray-400">No matches available for this league.</p>

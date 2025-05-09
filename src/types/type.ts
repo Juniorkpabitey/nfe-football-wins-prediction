@@ -1,14 +1,12 @@
 export interface matchesType {
-    competition: {
-      name: string;
-    };
-    homeTeam: {
-      name: string;
-      crest: string;
-    };
-    awayTeam: {
-      name: string;
-      crest: string;
-    };
-    utcDate: string;
-  }
+  id: string;
+  league: string;
+  leagueLogo: string;
+  leagueColor: string;
+  date: string;
+  homeTeam: string;
+  awayTeam: string;
+  homeLogo: string;
+  awayLogo: string;
+  time: string;
+}
