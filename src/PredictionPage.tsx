@@ -37,7 +37,7 @@ const PredictionPage = () => {
     if (!userMsg) return;
 
     try {
-      const genAI = new GoogleGenerativeAI("YOUR_GOOGLE_API_KEY_HERE"); // Replace with your actual key
+      const genAI = new GoogleGenerativeAI("AIzaSyAnyjf8Oc1WXwWrJHidVhcvWinWkQ28tpE"); // Replace with your actual key
       const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
       const chat = model.startChat({
