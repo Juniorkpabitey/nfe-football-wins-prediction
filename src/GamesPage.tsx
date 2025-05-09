@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Sidebar from "./components/Sidebar";
-import MatchCard from "./components/Matches"; // Matches is actually MatchCard
+import MatchCard from "./components/MatchCard";
 import { matchesType } from "./types";
 
 const GamesPage: React.FC = () => {

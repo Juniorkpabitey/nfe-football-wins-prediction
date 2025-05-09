@@ -1,4 +1,4 @@
-import * as React from "react"; // Import React if necessary for TypeScript
+// Removed unused React import
 import { useState } from "react";
 import { IoSend } from "react-icons/io5";
 import { FaFutbol, FaUsers, FaTrophy, FaChartBar } from "react-icons/fa";
