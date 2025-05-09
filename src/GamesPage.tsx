@@ -38,27 +38,13 @@ const GamesPage: React.FC = () => {
         </div>
 
         <div className="space-y-4 mt-6">
-        {matches.length > 0 ? (
-  matches.map((match, index) => {
-    const dateObj = new Date(match.utcDate);
-    const formattedMatch = {
-      league: match.competition.name,
-      leagueLogo: "/premier-league.png", // Ideally map logos based on league name
-      leagueColor: "text-green-400",     // Optionally add logic for dynamic color
-      date: dateObj.toDateString(),
-      homeTeam: match.homeTeam.name,
-      awayTeam: match.awayTeam.name,
-      homeLogo: match.homeTeam.crest,
-      awayLogo: match.awayTeam.crest,
-      time: dateObj.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-    };
-
-    return <Matches key={index} {...formattedMatch} />;
-  })
-) : (
-  <p className="text-gray-400">No matches available for this league.</p>
-)}
-
+          {matches.length > 0 ? (
+            matches.map((match, index) => (
+              <Matches key={index} data={match} />
+            ))
+          ) : (
+            <p className="text-gray-400">No matches available for this league.</p>
+          )}
         </div>
       </div>
     </div>
