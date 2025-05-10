@@ -1,8 +1,9 @@
 // Removed unused React import
 import { useState } from "react";
 import { IoSend } from "react-icons/io5";
-import { FaFutbol, FaUsers, FaTrophy, FaChartBar } from "react-icons/fa";
+import { FaFutbol } from "react-icons/fa";
 import { GoogleGenerativeAI } from "@google/generative-ai"; // Ensure this package is installed
+import { motion } from "framer-motion";
 
 const footballLeagues = [
   "Premier League",
@@ -21,7 +22,7 @@ const SYSTEM_PROMPT = `You are a football prediction assistant AI. You analyze p
 const PredictionPage = () => {
   const [message, setMessage] = useState("");
   const [isResponseScreen, setIsResponseScreen] = useState(false);
-  const [messages, setMessages] = useState<{ type: string; text: string }[]>([]); // Explicitly typing state
+  const [messages, setMessages] = useState<{ type: string; text: string }[]>([]);
   const [selectedLeague, setSelectedLeague] = useState(footballLeagues[0]);
 
   const hitRequest = () => {
@@ -32,11 +33,11 @@ const PredictionPage = () => {
     }
   };
 
-  const generateResponse = async (userMsg: string) => { // Type userMsg as string
+  const generateResponse = async (userMsg: string) => {
     if (!userMsg) return;
 
     try {
-      const genAI = new GoogleGenerativeAI("AIzaSyAnyjf8Oc1WXwWrJHidVhcvWinWkQ28tpE"); // Replace with your actual key
+      const genAI = new GoogleGenerativeAI("AIzaSyAnyjf8Oc1WXwWrJHidVhcvWinWkQ28tpE");
       const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
       const chat = model.startChat({
@@ -97,17 +98,34 @@ const PredictionPage = () => {
         </div>
       ) : (
         <div className="h-[80vh] flex flex-col items-center justify-center">
-          <h1 className="text-4xl mb-6">Predict With NFE</h1>
-          <div className="flex gap-4">
-            {[{ icon: <FaFutbol />, text: "Know about matches?." }, { icon: <FaChartBar />, text: "Wants statistics of games?" }, { icon: <FaUsers />, text: "Who is the best player in Barcelona?" }, { icon: <FaTrophy />, text: "Which club has the highest EUROPA Trophies?" }].map((item, i) => (
-              <div
-                key={i}
-                className="bg-[#181818] p-4 min-h-[20vh] w-[200px] rounded-lg relative hover:bg-[#201f1f] transition-all cursor-pointer"
-              >
-                <p className="text-lg whitespace-pre-wrap">{item.text}</p>
-                <span className="absolute bottom-3 right-3 text-xl">{item.icon}</span>
-              </div>
-            ))}
+          <div className="flex flex-col items-center mb-6">
+            <FaFutbol className="text-5xl text-green-500 mb-2" />
+            <h1 className="text-4xl font-bold">Predict With NFE</h1>
+          </div>
+
+          <div className="flex flex-wrap gap-4 justify-center mb-6">
+              {[
+                { name: "ilobet", icon: <FaFutbol />, url: "https://www.ilobet.com" },
+                { name: "BangBet", icon: <FaFutbol />, url: "https://www.bangbet.com" },
+                { name: "1xBet", icon: <FaFutbol />, url: "https://1xbet.com" },
+                { name: "Betway", icon: <FaFutbol />, url: "https://www.betway.com" },
+                { name: "Bet365", icon: <FaFutbol />, url: "https://www.bet365.com" },
+              ].map((platform, i) => (
+                <motion.a
+                  key={i}
+                  href={platform.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.1 * i, duration: 0.5 }}
+                  className="bg-[#181818] p-3 w-[150px] h-[120px] rounded-xl hover:shadow-lg hover:bg-[#222222] transition-all cursor-pointer flex flex-col justify-between no-underline text-white"
+                >
+                  <p className="text-md font-semibold">{platform.name}</p>
+                  <span className="self-end text-xl text-green-500">{platform.icon}</span>
+                </motion.a>
+              ))}
+
           </div>
         </div>
       )}
@@ -118,7 +136,11 @@ const PredictionPage = () => {
           <button
             key={league}
             onClick={() => setSelectedLeague(league)}
-            className={`px-4 py-2 text-sm rounded-full ${selectedLeague === league ? "bg-green-500 text-black" : "bg-[#181818] hover:bg-[#262626] text-white"}`}
+            className={`px-4 py-2 text-sm rounded-full ${
+              selectedLeague === league
+                ? "bg-green-500 text-black"
+                : "bg-[#181818] hover:bg-[#262626] text-white"
+            }`}
           >
             {league}
           </button>
